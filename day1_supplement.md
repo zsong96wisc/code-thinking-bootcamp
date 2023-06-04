@@ -1,4 +1,4 @@
-# 代码随想录算法训练营第一天（额外练习）| 35. Search Insert Position 、34. Find First and Last Position of Element in Sorted Array
+# 代码随想录算法训练营第一天（额外练习1）| 35. Search Insert Position 、34. Find First and Last Position of Element in Sorted Array
 作者：Zhiwei Song 
 日期：2023-05-29
 
