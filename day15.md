@@ -1,5 +1,6 @@
 # 代码随想录算法训练营第十五天| 102.二叉树的层序遍历 ， 107.二叉树的层次遍历II ， 199.二叉树的右视图 ， 637.二叉树的层平均值 ， 429.N叉树的层序遍历 ， 
 # 515.在每个树行中找最大值 ， 116.填充每个节点的下一个右侧节点指针 ， 117.填充每个节点的下一个右侧节点指针II ， 104.二叉树的最大深度 ， 111.二叉树的最小深度
+# 226.翻转二叉树 ， 101.对称二叉树
 作者：Zhiwei Song
 日期：2023-06-07
 
@@ -325,6 +326,62 @@ class Solution {
             res++;
         }
         return res;
+    }
+}
+```
+
+时间复杂度：``O(n)``, 空间复杂度：``O(n)``
+
+## 226.翻转二叉树
+题目链接：[https://leetcode.com/problems/invert-binary-tree/](https://leetcode.com/problems/invert-binary-tree/)
+
+思路：这道题只能用BFS和前后顺序遍历，不用用中序遍历，因为在处理子节点的时候，左右的child已经互换了。
+
+答案：
+
+```java
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        Deque<TreeNode> deque = new LinkedList<>();
+        if (root != null) deque.addLast(root);
+
+        while (!deque.isEmpty()) {
+            TreeNode cur = deque.removeFirst();
+            if (cur.left != null) deque.addLast(cur.left);
+            if (cur.right != null) deque.addLast(cur.right);
+            TreeNode swap = cur.left;
+            cur.left = cur.right;
+            cur.right = swap;
+        }
+
+        return root;
+    }
+}
+```
+
+时间复杂度：``O(n)``, 空间复杂度：``O(n)``
+
+## 101.对称二叉树
+题目链接：[https://leetcode.com/problems/symmetric-tree/](https://leetcode.com/problems/symmetric-tree/)
+
+思路：比较左右两棵subtree。
+
+答案：
+
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return check(root, root);
+    }
+
+    public boolean check(TreeNode node1, TreeNode node2) {
+        if (node1 == null || node2 == null) {
+            if (node1 == null && node2 == null) return true;
+            else return false;
+        }
+        
+        if (node1.val != node2.val) return false;
+        return check(node1.left, node2.right) && check(node1.right, node2.left);
     }
 }
 ```
