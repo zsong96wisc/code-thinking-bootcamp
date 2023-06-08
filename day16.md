@@ -22,7 +22,7 @@ class Solution {
 }
 ```
 
-时间复杂度：``O(n)``, 空间复杂度：``O(n)``
+时间复杂度：``O(log(n))``, 空间复杂度：``O(log(n))``
 
 ## 111.二叉树的最小深度
 题目链接：[https://leetcode.com/problems/minimum-depth-of-binary-tree/](https://leetcode.com/problems/minimum-depth-of-binary-tree/)
@@ -54,7 +54,7 @@ class Solution {
 }
 ```
 
-时间复杂度：``O(n)``, 空间复杂度：``O(n)``
+时间复杂度：``O(log(n))``, 空间复杂度：``O(log(n))``
 
 ## 222.完全二叉树的节点个数
 题目链接：[https://leetcode.com/problems/count-complete-tree-nodes/](https://leetcode.com/problems/count-complete-tree-nodes/)
@@ -95,4 +95,4 @@ class Solution {
 }
 ```
 
-时间复杂度：``O(n)``, 空间复杂度：``O(n)``
+时间复杂度：``O(n)``, 空间复杂度：``O(log(n))``
