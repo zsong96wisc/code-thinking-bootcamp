@@ -38,43 +38,27 @@ class Solution {
 
 ```java
 class Solution {
-    public int largestRectangleArea(int[] heights) {
-        Stack<Integer> st = new Stack<Integer>();
-        
-        // 数组扩容，在头和尾各加入一个元素
-        int [] newHeights = new int[heights.length + 2];
-        newHeights[0] = 0;
-        newHeights[newHeights.length - 1] = 0;
-        for (int index = 0; index < heights.length; index++){
-            newHeights[index + 1] = heights[index];
-        }
+    public int trap(int[] height) {
+        int length = height.length;
+        if (length <= 2) return 0;
+        int[] maxLeft = new int[length];
+        int[] maxRight = new int[length];
 
-        heights = newHeights;
-        
-        st.push(0);
-        int result = 0;
-        // 第一个元素已经入栈，从下标1开始
-        for (int i = 1; i < heights.length; i++) {
-            // 注意heights[i] 是和heights[st.top()] 比较 ，st.top()是下标
-            if (heights[i] > heights[st.peek()]) {
-                st.push(i);
-            } else if (heights[i] == heights[st.peek()]) {
-                st.pop(); // 这个可以加，可以不加，效果一样，思路不同
-                st.push(i);
-            } else {
-                while (heights[i] < heights[st.peek()]) { // 注意是while
-                    int mid = st.peek();
-                    st.pop();
-                    int left = st.peek();
-                    int right = i;
-                    int w = right - left - 1;
-                    int h = heights[mid];
-                    result = Math.max(result, w * h);
-                }
-                st.push(i);
-            }
+        // 记录每个柱子左边柱子最大高度
+        maxLeft[0] = height[0];
+        for (int i = 1; i< length; i++) maxLeft[i] = Math.max(height[i], maxLeft[i-1]);
+
+        // 记录每个柱子右边柱子最大高度
+        maxRight[length - 1] = height[length - 1];
+        for(int i = length - 2; i >= 0; i--) maxRight[i] = Math.max(height[i], maxRight[i+1]);
+
+        // 求和
+        int sum = 0;
+        for (int i = 0; i < length; i++) {
+            int count = Math.min(maxLeft[i], maxRight[i]) - height[i];
+            if (count > 0) sum += count;
         }
-        return result;
+        return sum;
     }
 }
 ```
